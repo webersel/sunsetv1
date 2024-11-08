@@ -6,8 +6,8 @@
   <title>Sunset Page</title>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=swap" rel="stylesheet">
   
-  <!-- Favicon -->
-  <link rel="icon" href="https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1697055271/salkeizk12orus/tzpiffyzbc9pdil0x5vb/Canvas-Logo.webp" type="image/webp">
+  <!-- Initial Favicon -->
+  <link id="favicon" rel="icon" href="https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1697055271/salkeizk12orus/tzpiffyzbc9pdil0x5vb/Canvas-Logo.webp" type="image/webp">
 
   <style>
     /* Base styles */
@@ -161,10 +161,29 @@
   </div>
 
   <script>
+    // Favicon rotation array
+    const favicons = [
+      "https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png",
+      "https://static-00.iconduck.com/assets.00/canvas-logo-icon-2048x2048-2szviaw2.png",
+      "https://www.datocms-assets.com/20338/1590058977-schoology-lms-logo.jpg?fit=crop&fm=jpg&h=232&q=80&w=232",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Google_Drive_icon_%282020%29.svg/640px-Google_Drive_icon_%282020%29.svg.png",
+      "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1697055271/salkeizk12orus/tzpiffyzbc9pdil0x5vb/Canvas-Logo.webp" // Original favicon
+    ];
+    
+    let faviconIndex = 0;
+
+    // Function to update favicon
+    function updateFavicon() {
+      faviconIndex = (faviconIndex + 1) % favicons.length;
+      document.getElementById("favicon").href = favicons[faviconIndex];
+    }
+
     // Toggle overlay and search bar on Alt key press
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Alt') {
         toggleSearch();
+      } else if (e.key === '!') {
+        updateFavicon();
       }
     });
 

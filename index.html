@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunset Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* Base styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Oswald', sans-serif;
+      background: url('https://i.pinimg.com/originals/b3/c3/04/b3c304eb383a9b25e6a2004c25009d2c.gif') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #ffffff;
+      transition: filter 0.3s ease, background-color 0.3s ease;
+    }
+
+    /* Container for title and version */
+    .title-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    /* Title styles */
+    .title-container h1 {
+      font-size: 60px;
+      margin: 0;
+    }
+
+    /* Version text style */
+    .title-container .version {
+      font-size: 24px;
+    }
+
+    /* Button container */
+    .button-container {
+      display: flex;
+      gap: 20px;
+    }
+
+    /* Button styles */
+    .button {
+      width: 80px;
+      height: 80px;
+      border-radius: 15px;
+      overflow: hidden;
+      border: none;
+      cursor: pointer;
+    }
+
+    .button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Overlay styles */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    /* Search bar container (separate from overlay blur) */
+    .search-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      z-index: 2;
+    }
+
+    /* Search bar styles */
+    .search-bar {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      width: 60%;
+      max-width: 500px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 8px;
+      font-size: 16px;
+      border: none;
+      outline: none;
+      border-radius: 5px;
+      color: #333;
+    }
+
+    .search-bar button {
+      background-color: orange;
+      color: #333;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+
+    /* Blur effect on content when search bar is visible */
+    .blurred {
+      filter: blur(4px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Main Title and Version -->
+  <div class="title-container" id="main-content">
+    <h1>SUNSET</h1>
+    <span class="version">v1</span>
+  </div>
+
+  <!-- Button Container -->
+  <div class="button-container" id="main-content">
+    <button class="button" onclick="openInIframe('https://adfree3kh0.github.io/projects.html')">
+      <img src="https://media0.giphy.com/media/cL4Q9j7rJCTDKXzSLy/giphy.gif?cid=6c09b9525wpcd2dn3bdjx2nbkkd248lzubo5lh55cudgswc5&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g" alt="Button Image 1">
+    </button>
+    <button class="button" onclick="openInIframe('https://ww.yesmovies.ag')">
+      <img src="https://media.lordicon.com/icons/wired/outline/2392-letter-m.gif" alt="Button Image 2">
+    </button>
+  </div>
+
+  <!-- Overlay Background -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Search Bar Container -->
+  <div class="search-container" id="searchContainer">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search Bing...">
+      <button onclick="searchBing()">Search</button>
+    </div>
+  </div>
+
+  <script>
+    // Toggle overlay and search bar on Alt key press
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Alt') {
+        toggleSearch();
+      }
+    });
+
+    function toggleSearch() {
+      const overlay = document.getElementById('overlay');
+      const searchContainer = document.getElementById('searchContainer');
+      const mainContent = document.querySelectorAll('#main-content');
+
+      const isActive = overlay.style.display === 'flex';
+
+      // Toggle visibility of overlay and search bar
+      overlay.style.display = isActive ? 'none' : 'flex';
+      searchContainer.style.display = isActive ? 'none' : 'block';
+      
+      // Toggle blur effect on main content
+      mainContent.forEach(content => {
+        content.classList.toggle('blurred', !isActive);
+      });
+    }
+
+    // Function to search Bing
+    function searchBing() {
+      const query = document.getElementById('searchInput').value;
+      if (query) {
+        window.open(`https://www.bing.com/search?q=${encodeURIComponent(query)}`, '_blank');
+      }
+    }
+
+    // Function to open links in an iframe in a new tab
+    function openInIframe(url) {
+      const newWindow = window.open();
+      newWindow.document.write(`<iframe src="${url}" width="100%" height="100%" frameborder="0"></iframe>`);
+      newWindow.document.body.style.margin = '0';
+      newWindow.document.body.style.overflow = 'hidden';
+    }
+  </script>
+
+</body>
+</html>

@@ -43,6 +43,13 @@
 
     .button-container {
       display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .button-row {
+      display: flex;
       gap: 20px;
     }
 
@@ -139,11 +146,16 @@
   </div>
 
   <div class="button-container" id="main-content">
-    <button class="button" onclick="openInIframe('https://somuchmath.global.ssl.fastly.net/projects.html')">
-      <img src="https://media0.giphy.com/media/cL4Q9j7rJCTDKXzSLy/giphy.gif?cid=6c09b9525wpcd2dn3bdjx2nbkkd248lzubo5lh55cudgswc5&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g" alt="Button Image 1">
-    </button>
-    <button class="button" onclick="openInIframe('https://ww.yesmovies.ag')">
-      <img src="https://media.lordicon.com/icons/wired/outline/2392-letter-m.gif" alt="Button Image 2">
+    <div class="button-row">
+      <button class="button" onclick="openInIframe('https://somuchmath.global.ssl.fastly.net/projects.html')">
+        <img src="https://media0.giphy.com/media/cL4Q9j7rJCTDKXzSLy/giphy.gif?cid=6c09b9525wpcd2dn3bdjx2nbkkd248lzubo5lh55cudgswc5&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g" alt="Button Image 1">
+      </button>
+      <button class="button" onclick="openInIframe('https://ww.yesmovies.ag')">
+        <img src="https://media.lordicon.com/icons/wired/outline/2392-letter-m.gif" alt="Button Image 2">
+      </button>
+    </div>
+    <button class="button" onclick="openInIframe('https://radon.games')">
+      <img src="https://i.pinimg.com/originals/04/79/d5/0479d5a64075831bd73a289182bbd85f.gif" alt="Button Image 3">
     </button>
   </div>
 
@@ -157,63 +169,19 @@
   </div>
 
   <div class="info-text">
-    ! to change icon and name of tab, alt to open search bar, backspace is panic button, add /proxylinks.html to the end and see websites
+    ! to change icon and name of tab, alt to open search bar, backspace is panic button, add proxy.html for websites, decided to host radon because im too lazy to make proxy
   </div>
 
   <script>
-    const faviconData = [
-      { url: "https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png", title: "Home" },
-      { url: "https://static-00.iconduck.com/assets.00/canvas-logo-icon-2048x2048-2szviaw2.png", title: "Canvas" },
-      { url: "https://www.datocms-assets.com/20338/1590058977-schoology-lms-logo.jpg?fit=crop&fm=jpg&h=232&q=80&w=232", title: "Schoology" },
-      { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Google_Drive_icon_%282020%29.svg/640px-Google_Drive_icon_%282020%29.svg.png", title: "Drive" },
-      { url: "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1697055271/salkeizk12orus/tzpiffyzbc9pdil0x5vb/Canvas-Logo.webp", title: "Sunset Page" }
-    ];
-    let faviconIndex = 0;
-    let searchBarActive = false;
-
-    function updateFavicon() {
-      faviconIndex = (faviconIndex + 1) % faviconData.length;
-      document.getElementById("favicon").href = faviconData[faviconIndex].url;
-      document.title = faviconData[faviconIndex].title;
-    }
-
-    function searchBing() {
-      const query = document.getElementById('searchInput').value;
-      if (query) {
-        window.open(`https://www.bing.com/search?q=${encodeURIComponent(query)}`, '_blank');
-      }
-    }
-
     function openInIframe(url) {
-      const newWindow = window.open();
-      newWindow.document.write(`<iframe src="${url}" width="100%" height="100%" frameborder="0"></iframe>`);
+      const newWindow = window.open('', '_blank', 'width=800,height=600');
+      newWindow.document.write(`
+        <title>Home</title>
+        <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png" type="image/png">
+        <iframe src="${url}" width="100%" height="100%" frameborder="0" style="border:none; margin:0; padding:0;"></iframe>
+      `);
       newWindow.document.body.style.margin = '0';
       newWindow.document.body.style.overflow = 'hidden';
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Alt') {
-        toggleSearch();
-      } else if (e.key === '!') {
-        updateFavicon();
-      } else if (e.key === 'Backspace' && !searchBarActive) {
-        window.location.href = "https://classroom.google.com";
-      }
-    });
-
-    function toggleSearch() {
-      const overlay = document.getElementById('overlay');
-      const searchContainer = document.getElementById('searchContainer');
-      const mainContent = document.querySelectorAll('#main-content');
-
-      searchBarActive = !searchBarActive;
-
-      overlay.style.display = searchBarActive ? 'flex' : 'none';
-      searchContainer.style.display = searchBarActive ? 'block' : 'none';
-
-      mainContent.forEach(content => {
-        content.classList.toggle('blurred', searchBarActive);
-      });
     }
   </script>
 
